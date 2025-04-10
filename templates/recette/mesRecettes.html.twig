@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RecetteController!{% endblock %}
+
+{% block body %}
+<div class="container my-5 mb-5"> 
+    <div class="row g-4">
+{% for recette in recettes %}
+<div class="col-12 col-md-6 col-lg-4">
+        <a href="{{ path('app_show_recette', {id: recette.id}) }}">
+        <div class="card">
+            <img src="{{recette.image}}"alt="" height="200" width="350"  class="card-img-top">
+            
+            
+            <h2>{{recette.titre}}</h2>
+            <p>{{recette.ingredient}}</p>
+            <b>{{recette.duree}}</b>min
+            {{recette.difficulte}}
+            {# <small>{{recette.auteur}}</small> #}
+            <a href="{{path ('app_delete_recette',{id:recette.id})}}" class="btn btn-danger">suprimer</a>
+            <a href="{{path ('app_edit-recette',{id:recette.id})}}" class="btn btn-warning">modifier</a>
+            
+        </div>
+    </a>
+    </div>
+    
+{% endfor %}
+
+</div>
+</div>
+{% endblock %}

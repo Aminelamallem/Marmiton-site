@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./assets/styles/app.css">
         {% block stylesheets %}
         {% endblock %}
 
@@ -11,7 +13,65 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="d-flex flex-column min-vh-100 bg-secondary">
+
+        <header>
+          <nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3  border-bottom bg-dark">
+            <div class="col-md-3 mb-2 mb-md-0">
+              <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+              </a>
+            </div>
+      
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="{{path('app_home')}}" class="nav-link px-2 text-light">Home</a></li>
+              <li><a href="{{path('app_recette')}}" class="nav-link px-2 text-light">Recette</a></li>
+              {% if app.user %}
+                
+              <li><a href="{{path('app_mesRecette')}}" class="nav-link px-2 text-light">Mes Recettes</a></li>
+              <li><a href="{{path('app_create_recette')}}" class="nav-link px-2 text-light">Creation Recette</a></li>
+              
+              {% endif %}
+            </ul>
+      
+            <div class="col-md-3 text-end">
+                {# btn btn-outline-warning  #}
+                {% if app.user %}
+                
+                <a href="{{path('app_logout')}}"type="button" class="me-2 btn btn-danger">Logout</a>
+                {% else %}
+                <a href="{{path('app_login')}}"type="button" class="me-2 btn btn-primary">Login</a>
+                <a href="{{path('app_register')}}"type="button" class="me-2 btn btn-success">Sign-in</a>
+             
+             {% endif %}
+             
+              {% if app.user and "ROLE_ADMIN" in app.user.roles %}
+                  <a href="{{ path('app_admin') }}" class=" px-2 link-dark btn btn-info mx-2  ">Admin</a>
+              {% endif %}
+            
+            </div>
+          </nav>
+        </header>
+
+        <main class="flex-grow-1">
+          {% block body %}{% endblock %}
+        </main>
+
+
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3  border-top bg-dark">
+          <p class="col-md-4 ml-2 text-light">&copy; 2025 Company, Inc</p>
+      
+          <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap">
+            <img src="https://e7.pngegg.com/pngimages/938/880/png-clipart-graphics-computer-icons-restaurant-logo-food-before-volleyball-serve-food-orange.png" alt="..." width="40" height="42" class="bi" role="img" aria-label="Bootstrap">
+          </a>
+      
+          {# <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="{{path('app_home')}}" class="nav-link px-2 text-light">Home</a></li>
+            <li class="nav-item"><a href="{{path('app_register')}}" class="nav-link px-2  text-light">Features</a></li>
+            <li class="nav-item"><a href="{{path('app_register')}}" class="nav-link px-2  text-light">Pricing</a></li>
+            <li class="nav-item"><a href="{{path('app_register')}}" class="nav-link px-2  text-light">FAQs</a></li>
+            <li class="nav-item"><a href="{{path('app_register')}}" class="nav-link px-2  text-light">About</a></li>
+          </ul> #}
+        </footer>
     </body>
 </html>

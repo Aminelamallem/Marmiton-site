@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5 mb-5 d-flex flex-column align-items-center">
+    <h1>
+        Les recettes
+    </h1>
+    <table class="table  table-striped table-bordered table-hover w-25 text-center">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Image</th>
+                <th>Auteur</th>
+                <th>Durée</th>
+                <th>Nombre de personne</th>
+                <th>Difficulté</th>
+                {# <th>Ingredients</th> #}
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+{% for recette in recettes %}
+        <tr>
+            <td>
+                {{ recette.id }}
+            </td>
+            <td>
+                {{ recette.titre }}
+            </td>
+            <td>
+                <img src="{{ recette.image }}" alt="Image" width="100">
+            </td>
+            <td>
+                {{ recette.auteur }}
+            </td>
+            <td>
+                {{ recette.duree }}
+            </td>
+            <td>
+                {{ recette.nbPersonne }}
+            </td>
+            <td>
+                {{ recette.difficulte }}
+            </td>
+            <td>
+                <a class="btn btn-danger" href="{{path('app_delete_recette', { id: recette.id })}}">
+                    supprimer
+                </a>
+            </td>
+
+            {# <td>
+                {% for ingredient in recette.ingredients %}
+                {{ ingredient.nom }} : {{ ingredient.quantite }}<br>
+            </td> #}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

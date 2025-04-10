@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %} {% block title %}Hello HomeController!{% endblock
+%} {% block body %}
+
+<header>
+    <div id="carouselExampleAutoplaying" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for item in recettes %}
+            <div class="carousel-item active">
+                <img src="{{ item.image }}" class="d-block w-100" alt="..." height="400px">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</header>
+ 
+<main>
+    <div class="container text-center mb-4">
+        <h4 class="text-light">Bienvenue sur notre site de recettes de cuisine ! Découvrez, créez et partagez vos meilleures recettes avec la communauté. Que vous soyez débutant ou chef passionné, ici, tout le monde peut cuisiner et s'inspirer !</h4>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for recette in recettes %}
+            <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                <div class="card h-100 bg-light">
+                    <img src="{{ recette.image }}" class="card-img-top" alt="Image de {{ recette.titre }}" height="200" width="350">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recette.titre }}</h5>
+                        <p class="card-text">{{ recette.ingredient }}</p>
+                        <p class="card-text"><small class="text-muted">{{ recette.duree }}</small></p>
+                        <p class="card-text">{{ recette.difficulte }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,3 +1,32 @@
-body {
-    background-color: skyblue;
-}
+/* body, main {
+    background-color: rgba(222, 211, 211, 0.701);-
+} */
+
+/* From Uiverse.io by SteveBloX */ 
+/* .card {
+    box-sizing: border-box;
+    width: 18em;
+    height: 20em;
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid white;
+    box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(6px);
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-weight: bolder;
+    color: black;
+  } */
+/*   
+  .card:hover {
+    border: 1px solid rgb(185, 22, 22);
+   
+    transform: scale(1.2) rotateZ(360deg);
+  }
+   */
+ 

@@ -1,0 +1,171 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\RecetteRepository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: RecetteRepository::class)]
+class Recette
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $titre = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $auteur = null;
+
+    #[ORM\Column]
+    private ?int $duree = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $ingredient = null;
+
+    #[ORM\Column]
+    private ?int $nb_personne = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $difficulte = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE,nullable: true)]
+    private ?\DateTimeInterface $created_at = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE,nullable: true)]
+    private ?\DateTimeInterface $updated_at = null;
+
+    #[ORM\ManyToOne(inversedBy: 'recettes')]
+    private ?User $user = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): static
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?string
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(string $auteur): static
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getDuree(): ?int
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(int $duree): static
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getIngredient(): ?string
+    {
+        return $this->ingredient;
+    }
+
+    public function setIngredient(string $ingredient): static
+    {
+        $this->ingredient = $ingredient;
+
+        return $this;
+    }
+
+    public function getNbPersonne(): ?int
+    {
+        return $this->nb_personne;
+    }
+
+    public function setNbPersonne(int $nb_personne): static
+    {
+        $this->nb_personne = $nb_personne;
+
+        return $this;
+    }
+
+    public function getDifficulte(): ?string
+    {
+        return $this->difficulte;
+    }
+
+    public function setDifficulte(string $difficulte): static
+    {
+        $this->difficulte = $difficulte;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): static
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): static
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+}
