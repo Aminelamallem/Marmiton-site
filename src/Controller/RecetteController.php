@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Recette;
 use App\Form\RecetteType;
+use App\Entity\Commentaire;
+use App\Form\CommentaireType;
 use App\Repository\RecetteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,19 +27,38 @@ final class RecetteController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'app_show_recette')]
-    public function show(RecetteRepository $recettes,$id): Response
+    public function show(RecetteRepository $recettes,$id,EntityManagerInterface $em,Request $request): Response
     {
+        $commentaire= new Commentaire();
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $commentaire = $form->getData();
+            $commentaire->setCreatedAt(new \DateTimeImmutable());
+            $commentaire->setRecettes($recettes->find($id));
+            $commentaire->setUser($this->getUser());
+            $em->persist($commentaire);
+            $em->flush();
+            return $this->redirectToRoute('app_show_recette', ['id' => $id]);
+        }
+        
+
+
+        
+        
         $recettes = $recettes->find($id);
         return $this->render('recette/show.html.twig', [
             'controller_name' => 'RecetteController',
-            'recettes' => $recettes
-        ]);
+            'recettes' => $recettes,
+            'form' => $form->createView(),
+        ]);                                                                                                                                                                                                                       
     }
     
     
     #[Route('/delete/{id}', name: 'app_delete_recette')]
     public function delete(EntityManagerInterface $em,$id,RecetteRepository $recette): Response
     {
+
         $recette = $recette->find($id);
         if ($recette) {
             $em->remove($recette);
@@ -63,6 +84,8 @@ final class RecetteController extends AbstractController
             $recette->setUser($this->getUser());
             $em->persist($recette);
             $em->flush();
+
+
             return $this->redirectToRoute('app_recette');
         }
 

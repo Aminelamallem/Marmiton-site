@@ -5,7 +5,7 @@
     <div id="carouselExampleAutoplaying" class="carousel slide mb-3" data-bs-ride="carousel">
         <div class="carousel-inner">
             {% for item in recettes %}
-            <div class="carousel-item active">
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
                 <img src="{{ item.image }}" class="d-block w-100" alt="..." height="400px">
             </div>
             {% endfor %}
@@ -25,7 +25,7 @@
                     <img src="{{ recette.image }}" class="card-img-top" alt="Image de {{ recette.titre }}" height="200" width="350">
                     <div class="card-body">
                         <h5 class="card-title">{{ recette.titre }}</h5>
-                        <p class="card-text">{{ recette.ingredient }}</p>
+                        {# <p class="card-text">{{ recette.ingredient }}</p> #}
                         <p class="card-text"><small class="text-muted">{{ recette.duree }}</small></p>
                         <p class="card-text">{{ recette.difficulte }}</p>
                     </div>

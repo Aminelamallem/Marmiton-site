@@ -19,7 +19,7 @@
             {# <small>{{recette.auteur}}</small> #}
             {# <a href="{{path ('app_delete_recette',{id:recette.id})}}" class="btn btn-danger">suprimer</a>
             <a href="{{path ('app_edit-recette',{id:recette.id})}}" class="btn btn-warning">modifier</a> #}
-            
+            <strong>{{recette.user.username}}</strong>
         </div>
     </a>
     </div>

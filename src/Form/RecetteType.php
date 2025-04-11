@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Ingredient;
 use App\Entity\Recette;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -16,9 +17,8 @@ class RecetteType extends AbstractType
         $builder
             ->add('titre')
             ->add('image')
-            ->add('auteur')
+            // ->add('auteur')
             ->add('duree')
-            ->add('ingredient')
             ->add('nb_personne')
             ->add('difficulte')
             // ->add('created_at', null, [
@@ -27,10 +27,12 @@ class RecetteType extends AbstractType
             // ->add('updated_at', null, [
             //     'widget' => 'single_text',
             // ])
-            // ->add('user', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'id',
-            // ])
+            ->add('ingredients', EntityType::class, [
+                'class' => Ingredient::class,
+                'choice_label' => 'label',
+                'multiple' => true,
+                'expanded' => true,
+            ])
         ;
     }
 

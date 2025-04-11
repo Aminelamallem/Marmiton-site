@@ -3,7 +3,7 @@
 {% block title %}Hello RecetteController!{% endblock %}
 
 {% block body %}
-<div class="container my-5 mb-5 d-flex justify-content-center align-items-center">
+<div class="container my-5 mb-5">
     <div class="row g-0">
 
 
@@ -15,7 +15,6 @@
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{recettes.titre}}</h5>
-              <p class="card-text">{{recettes.ingredient}}</p>
               <p class="card-text"><small class="text-body-secondary">{{recettes.duree}}</small></p>
               <p>{{recettes.difficulte}}</p>
             </div>
@@ -27,5 +26,21 @@
 
     </div>
 </div>
+
+<div class="container">
+  {{form_start(form)}}
+<button class="sumbit">Valider</button>
+  {{form_end(form)}}
+</div>
+
+{% for item in recettes.commentaires %}
+<p class="mt-3">
+  <strong>{{app.user.username}}</strong>
+  {{item.message}}
+  {{item.createdAt|date('d/m/Y H:i:s')}}
+</p>
+  
+{% endfor %}
+
 
 {% endblock %}
